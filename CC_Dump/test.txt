@@ -1,3 +1,58 @@
-Hello from Ciberspace!
-tEST
-Hello from CC 
+package file_laufwerke;
+
+import java.io.File;
+
+public class LaufwerkeTest {
+	public static void main(String[] args) {
+//		Laufwerke.print();
+		CopyTextFile.copyTextFile("source.txt", "copy.txt");
+		CopyTextFile.copyTextFile("source.txt", "copy.txt", true);
+	}
+}
+
+class CopyTextFile {
+
+	public static void copyTextFile(String fromFile, String toFile) {
+		// TODO Nutzereingabe einholen, ob überschrieben oder angehängt werden
+		// soll
+		boolean userChoice = true;
+
+		copyTextFile(fromFile, toFile, userChoice);
+
+	}
+
+	public static void copyTextFile(String fromFile, String toFile,
+			boolean append) {
+
+		// if (append)
+		// TODO die Zieldatei überschreiben! und anhängen
+
+	}
+
+}
+
+class Laufwerke {
+
+	public static void print() {
+
+		String ueberSchr = "|    LW |       Frei(MB) |     Belegt(MB) |     Gesamt(MB) |%n";
+		String zeilenTxt = "|   %s | %14d | %14d | %14d |%n";
+		String pfad = "";
+		long frei = 0;
+		long belegt = 0;
+		long gesamt = 0;
+
+		File[] rootList = File.listRoots();
+
+		System.out.printf(ueberSchr);
+
+		for (File file : rootList) {
+			pfad = file.getAbsolutePath();
+			frei = file.getFreeSpace();
+			gesamt = file.getTotalSpace();
+			belegt = gesamt - frei;
+
+			System.out.printf(zeilenTxt, pfad, frei, belegt, gesamt);
+		}
+	}
+}
